@@ -1,0 +1,293 @@
+package exc.examplecalc.calculator;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+
+public class MainActivity extends AppCompatActivity {
+    Button btnClear, btnDivide, btnMultiPy, btnBackSpace,
+            btnMinus, btnPlus, btnBracket, btnPoint,
+            btnPlus_Minus, btnEqual,
+            btnSeven, btnEight, btnNine, btnFour, btnFive, btnSix, btnOne, btnTwo, btnThree, btnZero, btnShow_Hide;
+    EditText txtResult;
+    LinearLayout linearLayout;
+    String getText = "";
+    String[] arrayOperationSymbol = {"+", "-", "*", ":"};
+    List<String> splitList = new ArrayList<>();
+    int countOpenBracket = 0;
+    int countClosedBracket = 0;
+    boolean checkPlus_Minus = true;
+    String lastText;
+    List<String> bracketTextList = new ArrayList<>();
+    String sum, multipy, divide, subtract;
+    float value1, value2;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        linearLayout = findViewById(R.id.show);
+        txtResult = findViewById(R.id.result);
+        btnShow_Hide = findViewById(R.id.show_hide);
+        btnClear = findViewById(R.id.clear);
+        btnBackSpace = findViewById(R.id.backSpace);
+        btnDivide = findViewById(R.id.divide);
+        btnMultiPy = findViewById(R.id.multipy);
+        btnMinus = findViewById(R.id.minus);
+        btnPlus = findViewById(R.id.plus);
+        btnBracket = findViewById(R.id.bracet);
+        btnPoint = findViewById(R.id.point);
+        btnPlus_Minus = findViewById(R.id.plus_minus);
+        btnEqual = findViewById(R.id.equal);
+        btnSeven = findViewById(R.id.seven);
+        btnEight = findViewById(R.id.eight);
+        btnNine = findViewById(R.id.nine);
+        btnFour = findViewById(R.id.four);
+        btnFive = findViewById(R.id.five);
+        btnSix = findViewById(R.id.six);
+        btnThree = findViewById(R.id.three);
+        btnTwo = findViewById(R.id.two);
+        btnOne = findViewById(R.id.one);
+        btnZero = findViewById(R.id.zero);
+
+
+        btnOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getText = txtResult.getText().toString();
+                int len = getText.length();
+                if (len > 0) {
+                    makeArray(getText);
+                }
+                if (len==0 ||!String.valueOf(getText.charAt(len - 1)).equals("=")) {
+                    txtResult.append(btnOne.getText().toString());
+
+                }
+
+            }
+        });
+        btnTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String getText = txtResult.getText().toString();
+                int len = getText.length();
+                if (len==0 ||!String.valueOf(getText.charAt(len - 1)).equals("=")) {
+                    txtResult.append(btnTwo.getText().toString());
+
+                }
+                if (len > 0) {
+                    makeArray(getText);
+                }
+
+            }
+        });
+        btnThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getText = txtResult.getText().toString();
+                int len = getText.length();
+                if (len==0 ||!String.valueOf(getText.charAt(len - 1)).equals("=")) {
+                    txtResult.append(btnThree.getText().toString());
+
+                }
+                if (len > 0) {
+                    makeArray(getText);
+                }
+
+            }
+        });
+        btnFour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getText = txtResult.getText().toString();
+                int len = getText.length();
+                if (len == 0 || !String.valueOf(getText.charAt(len - 1)).equals("=")) {
+                    txtResult.append(btnFour.getText().toString());
+
+                }
+                if (len > 0) {
+                    makeArray(getText);
+                }
+
+            }
+        });
+        btnFive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getText = txtResult.getText().toString();
+                int len = getText.length();
+                if (len==0 ||!String.valueOf(getText.charAt(len - 1)).equals("=")) {
+                    txtResult.append(btnFive.getText().toString());
+
+                }
+                if (len > 0) {
+                    makeArray(getText);
+                }
+            }
+        });
+        btnSix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getText = txtResult.getText().toString();
+                int len = getText.length();
+                if (len==0 ||!String.valueOf(getText.charAt(len - 1)).equals("=")) {
+                    txtResult.append(btnSix.getText().toString());
+
+                }
+                if (len > 0) {
+                    makeArray(getText);
+                }
+
+            }
+        });
+        btnSeven.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getText = txtResult.getText().toString();
+                int len = getText.length();
+                if (len==0 ||!String.valueOf(getText.charAt(len - 1)).equals("=")) {
+                    txtResult.append(btnSeven.getText().toString());
+
+                }
+                if (len > 0) {
+                    makeArray(getText);
+                }
+
+            }
+        });
+        btnEight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getText = txtResult.getText().toString();
+                int len = getText.length();
+
+                if (len==0 ||!String.valueOf(getText.charAt(len - 1)).equals("=")) {
+                    txtResult.append(btnEight.getText().toString());
+
+                }
+                if (len > 0) {
+                    makeArray(getText);
+                }
+
+            }
+        });
+
+        btnNine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getText = txtResult.getText().toString();
+                int len = getText.length();
+                if (len==0 ||!String.valueOf(getText.charAt(len - 1)).equals("=")) {
+                    txtResult.append(btnNine.getText().toString());
+
+                }
+                if (len > 0) {
+                    makeArray(getText);
+                }
+
+            }
+        });
+        btnZero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getButtonText = btnZero.getText().toString();
+                int len = getText.length();
+
+
+                if (len==0 ||!txtResult.getText().toString().isEmpty()
+                        || !String.valueOf(getText.charAt(len - 1)).equals("=")) {
+                    txtResult.append("0");
+                    Log.e("log", txtResult.getText().toString());
+                    String getText = txtResult.getText().toString();
+
+                    txtResult.append(btnZero.getText().toString());
+
+
+                    if (len > 0) {
+                        makeArray(getText);
+                    }
+                }
+            }
+
+
+        });
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtResult.setText("");
+                countOpenBracket = 0;
+                countClosedBracket = 0;
+            }
+        });
+        btnPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkLastSymbol(btnPlus.getText().toString());
+                int len = txtResult.getText().length();
+                sum = "summa";
+
+
+            }
+        });
+        btnPlus_Minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getText = txtResult.getText().toString();
+                int len = getText.length();
+                String lastSymbol = String.valueOf(getText.charAt(len - 1));
+                String text = getText.replace(lastSymbol, ("(-").concat(lastSymbol).concat(")"));
+
+
+                if (checkPlus_Minus) {
+                    txtResult.setText(text);
+                    txtResult.setSelection(txtResult.getText().length());
+                    countOpenBracket++;
+                    checkPlus_Minus = false;
+
+
+                } else {
+                    txtResult.setSelection(txtResult.getText().length());
+                    checkPlus_Minus = true;
+
+                }
+
+
+            }
+        });
+        btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkLastSymbol(btnMinus.getText().toString());
+                subtract = "ferq";
+
+            }
+        });
+        btnMultiPy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkLastSymbol(btnMultiPy.getText().toString());
+                multipy = "hasil";
+
+            }
+        });
+        btnDivide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkLastSymbol(btnDivide.getText().toString());
+                divide = "qismet";
+
+
+            }
+        });
+        btnBracket.setOnClickListener(new View.On

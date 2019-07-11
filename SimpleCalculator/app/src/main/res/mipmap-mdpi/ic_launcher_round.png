@@ -1,0 +1,72 @@
+package exc.examplecalc.calculator;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+
+public class MainActivity extends AppCompatActivity {
+    Button btnClear, btnDivide, btnMultiPy, btnBackSpace,
+            btnMinus, btnPlus, btnBracket, btnPoint,
+            btnPlus_Minus, btnEqual,
+            btnSeven, btnEight, btnNine, btnFour, btnFive, btnSix, btnOne, btnTwo, btnThree, btnZero, btnShow_Hide;
+    EditText txtResult;
+    LinearLayout linearLayout;
+    String getText = "";
+    String[] arrayOperationSymbol = {"+", "-", "*", ":"};
+    List<String> splitList = new ArrayList<>();
+    int countOpenBracket = 0;
+    int countClosedBracket = 0;
+    boolean checkPlus_Minus = true;
+    String lastText;
+    List<String> bracketTextList = new ArrayList<>();
+    String sum, multipy, divide, subtract;
+    float value1, value2;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        linearLayout = findViewById(R.id.show);
+        txtResult = findViewById(R.id.result);
+        btnShow_Hide = findViewById(R.id.show_hide);
+        btnClear = findViewById(R.id.clear);
+        btnBackSpace = findViewById(R.id.backSpace);
+        btnDivide = findViewById(R.id.divide);
+        btnMultiPy = findViewById(R.id.multipy);
+        btnMinus = findViewById(R.id.minus);
+        btnPlus = findViewById(R.id.plus);
+        btnBracket = findViewById(R.id.bracet);
+        btnPoint = findViewById(R.id.point);
+        btnPlus_Minus = findViewById(R.id.plus_minus);
+        btnEqual = findViewById(R.id.equal);
+        btnSeven = findViewById(R.id.seven);
+        btnEight = findViewById(R.id.eight);
+        btnNine = findViewById(R.id.nine);
+        btnFour = findViewById(R.id.four);
+        btnFive = findViewById(R.id.five);
+        btnSix = findViewById(R.id.six);
+        btnThree = findViewById(R.id.three);
+        btnTwo = findViewById(R.id.two);
+        btnOne = findViewById(R.id.one);
+        btnZero = findViewById(R.id.zero);
+
+
+        btnOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getText = txtResult.getText().toString();
+                int len = getText.length();
+                if (len > 0) {
+                    makeArray(getText);
+                }
+                if (!String.valueOf(getText
